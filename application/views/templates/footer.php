@@ -1,7 +1,7 @@
   <!-- Footer -->
-  <footer class="sticky-footer bg-white">
+  <footer class="sticky-footer" style="background-color: blue;">
       <div class="container my-auto">
-          <div class="copyright text-center my-auto">
+          <div class="copyright text-center my-auto" style="color: white;">
               <span>Copyright &copy; Sistem Informasi <?= date('Y'); ?></span>
           </div>
       </div>
@@ -15,7 +15,7 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
+  <a class="scroll-to-top rounded" href="#page-top" style="background-color: greenyellow;color:blue;">
       <i class="fas fa-angle-up"></i>
   </a>
 

@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <div class="row">
-        <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
 
         <div class="form-group col-sm-3">
             <div class="form-group">

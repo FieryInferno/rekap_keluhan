@@ -2,14 +2,14 @@
 <div class="container-fluid">
 
      <!-- Page Heading -->
-     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
      <!-- Content Wrapper. Contains page content -->
 
      <section class="content">
           <div class="row justify-content-center">
                <div class="col-10">
                     <div class="card card-primary">
-                         <form action="<?php echo base_url('menu/ubah/' . $konten['id']) ?>" method="POST" role="form" enctype="multipart/form-data">
+                         <form action="<?php echo base_url('kuisioner/ubahPertanyaan/' . $konten['id']) ?>" method="POST" role="form" enctype="multipart/form-data">
                               <input type="hidden" name="id" value="<?= $konten['id']; ?>">
                               <div class="card-body">
                                    <div class="form-group">
@@ -20,7 +20,7 @@
                                    <div class="form-group">
                                         <label for="keterangan">Keterangan</label>
                                         <textarea name="keterangan" id="keterangan" cols="10" class="form-control"><?php echo $konten['keterangan']; ?></textarea>
-                                        <small class=" text-danger"><?php echo form_error('keterangan'); ?></small>
+                                        <small class="text-danger"><?php echo form_error('keterangan'); ?></small>
                                    </div>
                                    <div class="">
                                         <label for="">Gambar</label>

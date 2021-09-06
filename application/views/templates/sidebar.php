@@ -1,16 +1,16 @@
  <!-- Sidebar -->
- <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" data-widget="treeview" role="menu" data-accordion="false">
+ <ul class="navbar-nav bg-maroon-primary sidebar sidebar-dark accordion" id="accordionSidebar" data-widget="treeview" role="menu" data-accordion="false">
      <nav class="mt-2">
          <!-- Sidebar - Brand -->
          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
              <div class="sidebar-brand-icon rotate-n-15">
                  <i class="far fa-clipboard"></i>
              </div>
-             <div class="sidebar-brand-text mx-3">SI Kendala<sup></sup></div>
+             <div class="sidebar-brand-text mx-3">SI Keluhan<sup></sup></div>
          </a>
 
          <!-- Divider -->
-         <hr class="sidebar-divider ">
+         <hr class=" sidebar-divider ">
          <!-- QUERRY MENU (JOIN 2 TABEL USER_MENU /USER-ACCESS_MENU on primary and foreignkey ) -->
          <?php
             $role_id = $this->session->userdata('role_id');
@@ -25,8 +25,8 @@
 
          <!-- LOOPING MENU-->
          <?php foreach ($menu as $m) : ?>
-             <div class="sidebar-heading">
-                 <div href="" class="sidebar-heading" style="color: aliceblue;font-size: 12 px;">
+             <div class=" sidebar-heading">
+                 <div href="" class="sidebar-heading" style="color: alicgeblue;font-size: 12 px;">
                      <?= $m['menu']; ?></div>
              </div>
 

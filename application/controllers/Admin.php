@@ -11,7 +11,7 @@ class Admin extends CI_Controller
     public function index()
     {
         $data = array(
-            'title' => 'Dashboard Admin',
+            'title' => 'Dashboard',
             'user' => $this->db->get_where('user', ['email' =>
             $this->session->userdata('email')])->row_array(),
             'konten' => $this->db->get('tb_konten')->num_rows(),
@@ -19,14 +19,24 @@ class Admin extends CI_Controller
             'jaringan' => $this->db->get('rekapkendalajaringan')->num_rows(),
             'pelanggan' => $this->db->get('tb_pelanggan')->num_rows(),
             'kelolauser' => $this->db->get('user')->num_rows(),
-
+            'hasilkuisioner' => $this->db->query("select *, 
+        sum(harapan) as harapan, sum(kinerja) as kinerja
+        from tb_hasilkuis 
+        join tb_kuisioner on tb_hasilkuis.id_kuis = tb_kuisioner.id_kuis 
+        group by tb_hasilkuis.id_kuis")->result_array()
         );
+
+        $data['jumlahpelangganisi'] = $this->Kuis_model->getjumlahpelanggan();
+        $data['jumlahuserpelanggan'] = count($this->Userpelanggan_model->getAllUserpelanggan());
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('templates/footer', $data);
     }
+
 
     public function role()
     {
@@ -57,7 +67,7 @@ class Admin extends CI_Controller
         $this->load->view('admin/role-access', $data);
         $this->load->view('templates/footer');
     }
-    public function changeAccess() //9
+    public function changeAccess() //
     {
         $menu_id = $this->input->post('menuId');
         $role_id = $this->input->post('roleId');

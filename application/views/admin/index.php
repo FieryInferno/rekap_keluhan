@@ -2,7 +2,6 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -88,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- ./col -->
                 <!-- ./col -->
             </div>
@@ -96,34 +96,80 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Grafik Laporan</h1>
 
-
-            <!-- Content Row -->
             <div class="row">
 
-                <div class="col-xl-6 col-lg-5">
-                    <!-- Bar Chart -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Grafik</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-bar">
-                                <canvas id="myBarChart"></canvas>
+
+                <diviv class="col-xl-12">
+                    <!-- Content Row -->
+
+
+                    <div class="col-xl-12 col-lg-5">
+                        <!-- Bar Chart -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header md-6">
+                                <h1 class="h3 mb-2 text-primary" style="text-align: center;"><a href="<?php echo base_url('kuisioner/hasilkuis') ?>">Hasil Kuisioner Pelanggan</a></h1>
+                                </br>
+                                <h3> Pelanggan yang mengisi <?= $jumlahpelangganisi ?> dari <?= $jumlahuserpelanggan ?> pelanggan yang belum mengisi <?= $jumlahuserpelanggan - $jumlahpelangganisi ?> pelanggan</h3>
                             </div>
-                            <hr>
-                            Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="dataTablekuis">
+                                        <thead>
+                                            <th>Pertanyaan</th>
+                                            <th>Tingkat Kesesuaian</th>
+                                            <th>Kualitas Pelayanan</th>
+                                            <th>Saran Keputusan</th>
+                                            <th>Keputusan Direktur</th>
+                                            <!-- <th>Kuadran</th> -->
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($hasilkuisioner as $h) { ?>
+                                                <tr>
+                                                    <td><?= $h['pertanyaan']; ?></td>
+                                                    <?php $a = $h['kinerja'] / $h['harapan'] * 100;
+                                                    if ($a < 100) {
+                                                        $a = $a;
+                                                    } else {
+                                                        $a = 100;
+                                                    } ?>
+                                                    <td style="text-align: center;"><?= $a ?>%</td>
+                                                    <td style="text-align:center;"><?php
+                                                                                    if ($a > 85) {
+                                                                                        echo "<div style='background-color:green;color:white;'>Pertahankan Prestasi</div>";
+                                                                                    } elseif ($a > 65) {
+                                                                                        echo "<div style='background-color:blue;'>Prioritas Rendah</div>";
+                                                                                    } elseif ($a > 35) {
+                                                                                        echo "<div style='background-color:yellow;color:black;'>Berlebihan</div>";
+                                                                                    } elseif ($a > -1) {
+                                                                                        echo "<div style='background-color:red;color:white;'>Priotitas Utama</div>";
+                                                                                    }
+                                                                                    ?></td>
+                                                    <td><?= $a > -1 && $a < 65 ? $h['saran'] : '';  ?></td>
+                                                    <td><?= $a > -1 && $a < 65 ? $h['keputusan'] : '';  ?></td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                         </div>
                     </div>
-
-                </div>
-
-                <!-- Donut Chart -->
             </div>
+
+
+            <!-- Donut Chart -->
+
+
 
         </div>
 </div>
+
 </div>
 <!-- End of Main Content -->
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>

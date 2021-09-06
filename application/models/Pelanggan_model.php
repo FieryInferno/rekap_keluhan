@@ -8,23 +8,16 @@ class Pelanggan_model extends CI_Model
           return $this->db->get('tb_pelanggan')->num_rows();
           return $this->db->get('tb_pelanggan')->result_array();
      }
-     public function getPelanggan($keyword = null)
+     public function getPelanggan()
      {
-          // if ($keyword) {
-          //      $this->db->like('nama', $keyword);
-          //      $this->db->or_like('id_pelanggan', $keyword);
-          //      $this->db->or_like('idp', $keyword);
-          //      $this->db->or_like('nama', $keyword);
-          //      $this->db->or_like('nik', $keyword);
-          //      $this->db->or_like('alamat', $keyword);
-          //      $this->db->or_like('kampung', $keyword);
-          //      $this->db->or_like('nohp', $keyword);
-          // }
-          // return $this->db->get('tb_pelanggan')->result_array();
-
-          $this->datatables->select('*');
+          $this->datatables->select('tb_pelanggan.*, tb_pelanggan.nik, tb_pelanggan.id_pelanggan, tb_pelanggan.nama, tb_meter.no,tb_meter.sektor, tb_meter.nometer');
+          $this->datatables->join('tb_meter', 'tb_meter.id_p=tb_pelanggan.idp');
           $this->datatables->from('tb_pelanggan');
           return $this->datatables->generate();
+
+          // $this->datatables->select('*');
+          // $this->datatables->from('tb_pelanggan');
+          // return $this->datatables->generate();
      }
      public function getPelangganById($id)
      {

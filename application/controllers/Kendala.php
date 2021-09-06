@@ -24,39 +24,57 @@ class Kendala extends CI_Controller
     }
     public function addKendalajaringan()
     {
-        $tgl = $this->input->post('tgl');
-        $id_pelanggan = $this->input->post('id_pelanggan');
-        $nik = $this->input->post('nik');
-        $nama = $this->input->post('nama');
-        $nometer = $this->input->post('nometer');
-        $sektor = $this->input->post('sektor');
-        $masalah = $this->input->post('masalah');
-        $keterangan = $this->input->post('keterangan');
-        $solusi = $this->input->post('solusi');
-        $tanggalkunjungan = $this->input->post('tanggalkunjungan');
-        $tanggalterakhir = $this->input->post('tanggalterakhir');
-        $status = $this->input->post('status');
-        $teknisi = $this->input->post('teknisi');
+        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'required|trim');
 
-        $data = array(
-            'tgl' => $tgl,
-            'id_pelanggan' => $id_pelanggan,
-            'nik' => $nik,
-            'nama' => $nama,
-            'nometer' => $nometer,
-            'sektor' => $sektor,
-            'masalah' => $masalah,
-            'keterangan' => $keterangan,
-            'solusi' => $solusi,
-            'tanggalkunjungan' => $tanggalkunjungan,
-            'tanggalterakhir' => $tanggalterakhir,
-            'status' => $status,
-            'teknisi' => $teknisi
-        );
+        if ($this->form_validation->run() == 0) {
+            $data['title'] = 'Kendala Jaringan';
+            $data['user'] = $this->db->get_where('user', ['email' =>
+            $this->session->userdata('email')])->row_array();
 
-        $this->db->insert('rekapkendalajaringan', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New Kendala added</div>');
-        redirect('menu/kendalajaringan');
+            $data['jaringan'] = $this->db->get('rekapkendalajaringan')->result_array();
+
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        Data gagal di input, ada data yang salah atau kosong!</div>');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/kendalajaringan', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $tgl = $this->input->post('tgl');
+            $id_pelanggan = $this->input->post('id_pelanggan');
+            $nik = $this->input->post('nik');
+            $nama = $this->input->post('nama');
+            $nometer = $this->input->post('nometer');
+            $sektor = $this->input->post('sektor');
+            $masalah = $this->input->post('masalah');
+            $keterangan = $this->input->post('keterangan');
+            $solusi = $this->input->post('solusi');
+            $tanggalkunjungan = $this->input->post('tanggalkunjungan');
+            $tanggalterakhir = $this->input->post('tanggalterakhir');
+            $status = $this->input->post('status');
+            $teknisi = $this->input->post('teknisi');
+
+            $data = array(
+                'tgl' => $tgl,
+                'id_pelanggan' => $id_pelanggan,
+                'nik' => $nik,
+                'nama' => $nama,
+                'nometer' => $nometer,
+                'sektor' => $sektor,
+                'masalah' => $masalah,
+                'keterangan' => $keterangan,
+                'solusi' => $solusi,
+                'tanggalkunjungan' => $tanggalkunjungan,
+                'tanggalterakhir' => $tanggalterakhir,
+                'status' => $status,
+                'teknisi' => $teknisi
+            );
+
+            $this->db->insert('rekapkendalajaringan', $data);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">New Kendala added</div>');
+        }
+        redirect('kendala/kendalajaringan');
     }
     public function ubahjaringan($id)
     {
@@ -87,7 +105,7 @@ class Kendala extends CI_Controller
             $this->Jaringan_model->ubahjaringan();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Data Kendala Jaringan berhasil diubah!</div>');
-            redirect('menu/kendalajaringan');
+            redirect('kendala/kendalajaringan');
         }
     }
 
@@ -96,7 +114,7 @@ class Kendala extends CI_Controller
         $this->Jaringan_model->hapusjaringan($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
         Data dihapus!</div>');
-        redirect('menu/kendalajaringan');
+        redirect('kendala/kendalajaringan');
     }
     public function kendalatidakaktif()
     {
@@ -142,7 +160,7 @@ class Kendala extends CI_Controller
         );
         $this->db->insert('rekaptidakaktif', $data);
         $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">data berhasil ditambahkan</div>');
-        redirect('menu/kendalatidakaktif');
+        redirect('kendala/kendalatidakaktif');
     }
     public function ubahtidakaktif($id)
     {
@@ -175,7 +193,7 @@ class Kendala extends CI_Controller
             $this->Tidakaktif_model->ubahtidakaktif();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Data Pelanggan berhasil diubah!</div>');
-            redirect('menu/kendalatidakaktif');
+            redirect('kendala/kendalatidakaktif');
         }
     }
 
@@ -184,7 +202,7 @@ class Kendala extends CI_Controller
         $this->Tidakaktif_model->hapustidakaktif($id);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
         Data dihapus!</div>');
-        redirect('menu/kendalatidakaktif');
+        redirect('kendala/kendalatidakaktif');
     }
     public function getTidakaktif()
     {
@@ -195,5 +213,19 @@ class Kendala extends CI_Controller
     {
         header('Content-Type: application/json');
         echo $this->Jaringan_model->getJaringan();
+    }
+
+    public function trackkendala()
+    {
+        $data['title'] = 'Tracking Kendala';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['jaringan'] = $this->db->get('rekapkendalajaringan')->result_array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/trackingkendala', $data);
+        $this->load->view('templates/footer', $data);
     }
 }

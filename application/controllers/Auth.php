@@ -39,7 +39,8 @@ class Auth extends CI_Controller
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
-                        'role_id' => $user['role_id']
+                        'role_id' => $user['role_id'],
+                        'nama' => $user['nama']
                     ];
 
                     $this->session->set_userdata($data);
@@ -47,8 +48,10 @@ class Auth extends CI_Controller
                         redirect('admin');
                     } else if ($user['role_id'] == 2) {
                         redirect('user');
-                    } else {
+                    } else if ($user['role_id'] == 3) {
                         redirect('direktur');
+                    } else {
+                        redirect('Koordinator/Index');
                     }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password!</div>');
@@ -102,13 +105,68 @@ class Auth extends CI_Controller
         }
     }
 
+    public function loginpelanggan()
+    {
+        if ($this->session->userdata('id_pelanggan')) {
+            redirect('pelanggan/dashboard');
+        }
+        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Login Pelanggan';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/loginpelanggan');
+            $this->load->view('templates/auth_footer');
+        } else {
+            // ketika validasinya succses
+            $this->_loginpelanggan();
+        }
+    }
+
+    private function _loginpelanggan()
+    {
+        $id_pelanggan = $this->input->post('id_pelanggan');
+        $password = $this->input->post('password');
+
+        $user = $this->db->get_where('userpelanggan', ['id_pelanggan' => $id_pelanggan])->row_array();
+
+        if ($user) {
+            //jika usernya ada
+            if ($user['is_active'] == 1) {
+                //cek password
+
+                if (password_verify($password, $user['password'])) {
+                    $data = [
+                        'id_pelanggan' => $user['id_pelanggan'],
+                        'role_id' => $user['role_id'],
+                        'nama' => $user['nama'],
+                        'image' => $user['image']
+
+                    ];
+
+                    $this->session->set_userdata($data);
+                    redirect('Konsumen/pelanggan');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong Password!</div>');
+                    redirect('auth/loginpelanggan');
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Id Pelanggan Tidak aktif</div>');
+                redirect('auth/loginpelanggan');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This Id Pelanggan Tidak terdaftar</div>');
+            redirect('auth/loginpelanggan');
+        }
+    }
 
     public function logout()
     {
         $this->session->unset_userdata('email');
+        $this->session->unset_userdata('id_pelanggan');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logout</div>');
-        redirect('auth');
+        redirect('home');
     }
 
     public function blocked()

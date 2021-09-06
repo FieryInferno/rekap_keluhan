@@ -1,5 +1,5 @@
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer id="footer" style="background-color:maroon">
     <div class="footer-top">
         <div class="container">
             <div class="row">
@@ -46,7 +46,7 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top"><i class="bx bxs-up-arrow-alt"></i></a>
+<a href="#" class="back-to-top"><i class="bx bxs-up-arrow-alt" style="background-color:greenyellow;color:blue"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="<?php echo base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>

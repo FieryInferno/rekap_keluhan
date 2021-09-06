@@ -10,7 +10,15 @@ class Menu extends CI_Controller
         is_logged_in();
     }
 
-
+    public function dashboard()
+    {
+        $role_id = 'role_id';
+        if ($role_id = 5) {
+            redirect('Pelanggan/dashboard');
+        } else {
+            redirect('admin/index');
+        }
+    }
     public function cariuser()
     {
         $data['title'] = 'Kelola User';
@@ -209,7 +217,7 @@ class Menu extends CI_Controller
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required|trim');
 
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-        if ($this->form_validation->run() == false) {
+        if (!$this->form_validation->run() == false) {
             $data['title'] = 'Kelola User';
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -254,10 +262,97 @@ class Menu extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
+
+    public function kelolauserpelanggan()
+    {
+        $data['title'] = 'Kelola User Pelanggan';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+
+        $keyword = $this->input->post('keyword');
+        $data['kelolauserpelanggan'] = $this->Userpelanggan_model->get_keyword($keyword);
+
+        $data['kelolauserpelanggan'] = $this->db->get('userpelanggan')->result_array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/kelolauserpelanggan', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function adduserpelanggan()
+    {
+        $this->form_validation->set_rules('id_pelanggan', 'Id_pelanggan', 'required|trim', [
+            'required' => 'This id has already registered!'
+        ]);
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules(
+            'password',
+            'Password',
+            'required|trim|min_length[3]|matches[password2]',
+            [
+                'matches' => 'password dont match!',
+                'min_length[3]' => 'password too short'
+            ]
+        );
+        $this->form_validation->set_rules('password2', 'Password2', 'required|trim|matches[password]');
+        $this->form_validation->set_rules('nometer', 'Nometer', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            // $this->session->set_flashdata('warning', '<div class="alert alert-danger" role="alert">
+            // Data ada yang salah !</div>');
+
+            $data['title'] = 'Kelola User Pelanggan';
+            $data['user'] = $this->db->get_where('user', ['email' =>
+            $this->session->userdata('email')])->row_array();
+
+
+            $keyword = $this->input->post('keyword');
+            $data['kelolauserpelanggan'] = $this->Userpelanggan_model->get_keyword($keyword);
+
+            $data['kelolauserpelanggan'] = $this->db->get('userpelanggan')->result_array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/kelolauserpelanggan', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $id_pelanggan = $this->input->post('id_pelanggan', true);
+
+            $data = [
+                'id_pelanggan' => $id_pelanggan,
+                'nama' => htmlspecialchars($this->input->post('nama', true)),
+                'email' => htmlspecialchars($this->input->post('email', true)),
+                'nometer' => htmlspecialchars($this->input->post('nometer', true)),
+                'password' =>  password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'image' => 'default.jpg',
+                'role_id' => 5,
+                'is_active' => 1
+            ];
+
+            $this->db->insert('userpelanggan', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New menu added</div>');
+        }
+        redirect('menu/kelolauserpelanggan');
+    }
+    public function hapususerpelanggan($id)
+    {
+        $this->Userpelanggan_model->hapususerpelanggan($id);
+        $this->session->set_flashdata('warning', '<div class="alert alert-danger" role="alert">
+        Data dihapus!</div>');
+        redirect('menu/kelolauserpelanggan');
+    }
+
     public function getUser()
     {
         header('Content-Type: application/json');
         echo $this->User_model->getUser();
+    }
+    public function getUserpelanggan()
+    {
+        header('Content-Type: application/json');
+        echo $this->Userpelanggan_model->getUserpelanggan();
     }
     public function getKonten()
     {

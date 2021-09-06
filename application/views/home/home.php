@@ -1,4 +1,4 @@
-<section id="hero" style="padding-top: 0%;padding-bottom: 2%;">
+<section id="hero" style="padding-top: 0%;padding-bottom: 0%;">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
@@ -17,8 +17,8 @@
                         <div id="latar">
                             <div class="tembus">
                                 <div class="teks">
-                                    <h1 style="color: white">Keselamatan yang utama</h1>
-                                    <h3>PT SEA selalu mengutamakan keselamatan</h3>
+                                    <h1 style="color: greenyellow">Keselamatan yang utama</h1>
+                                    <h3 style="color: white">PT SEA selalu mengutamakan keselamatan</h3>
 
                                 </div>
                             </div>
@@ -35,8 +35,8 @@
                         <div id="latar">
                             <div class="tembus">
                                 <div class="teks">
-                                    <h2 style="font-size: 30px;color: white"><b>PRAKTIS, AMAN, TEKANAN RENDAH, DAN GAS SELALU TERSEDIA</b></h2>
-                                    <h3>Merupakan Keuntungan Menggunakan Jaringan Gas</h3>
+                                    <h2 style="font-size: 30px;color: greenyellow"><b>PRAKTIS, AMAN, TEKANAN RENDAH, DAN GAS SELALU TERSEDIA</b></h2>
+                                    <h3 style="color: white">Merupakan Keuntungan Menggunakan Jaringan Gas</h3>
 
                                 </div>
                             </div>
@@ -46,14 +46,14 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="<?= base_url('assets/img/jargas/5.png'); ?>" width="400" height="450" alt="Third slide">
+                <img class="d-block w-100" src="<?= base_url('assets/img/jargas/0.png'); ?>" width="400" height="450" alt="Third slide">
                 <div class="carousel-caption d-md-block">
                     <div class="slider_title">
                         <div id="latar">
                             <div class="tembus">
                                 <div class="teks">
-                                    <h1 style="color: white">JARGAS (JARINGAN GAS) KOTA</h1>
-                                    <h3>Jaringan Distribusi Gas Bumi Untuk Rumah Tangga dan pedagang kecil<br>
+                                    <h2 style="font-size: 30px;color: greenyellow">JARGAS (JARINGAN GAS) KOTA</h2>
+                                    <h3 style="color: white">Jaringan Distribusi Gas Bumi Untuk Rumah Tangga dan pedagang kecil<br>
                                         Yang Wilayahnya Terdapat Sumber Gas Dan Telah Memiliki Infrastruktur Pipa Gas</h3>
 
                                 </div>
@@ -78,7 +78,7 @@
 
 <!-- ======= Cta Section ======= -->
 <section id="cta" class="cta">
-    <div class="container">
+    <div class="container" style="padding-bottom: 30px;">
         <div class="row" data-aos="zoom-in">
             <div class="col-lg-9 text-center text-lg-left">
                 <h3 style="color: blue;">Membutuhkan teknisi atau Tercium Bau Gas?! <br>Segera hubungi Call Center!</h3>
@@ -90,10 +90,13 @@
             </div>
         </div>
     </div>
+
+    <div data-aos="fade-up" style="background-color:darkred;text-align: center;">
+        <h2 style="color:white;">News</h2>
+    </div>
+
     <div class="container">
-        <div class="section-title" data-aos="fade-up">
-            <h2 style="padding-top: 50px ;">News</h2>
-        </div>
+
         <div class="row text-center">
             <?php foreach ($konten as $k) : ?>
                 <div class="col-sm-4 " data-aos="zoom-in" style="padding-top:20px">
@@ -113,14 +116,12 @@
 
 
 <!-- ======= Services Section ======= -->
-<section id="services" class="services section-bg">
-    <div class="container">
+<section id="services" class="services cta">
+    <div data-aos="fade-up" style="background-color:darkred;text-align: center;">
+        <h2 style="color:white;">Tips Keselamatan Menggunakan Jargas</h2>
+    </div>
 
-        <div class="section-title" data-aos="fade-up">
-            <h2>Tips Keselamatan Menggunakan Jargas</h2>
-            <p></p>
-        </div>
-
+    <div class="container" style="padding-top: 20px;">
         <div class="row">
             <div class="align-items-center" data-aos="zoom-in" style="width: 400px;padding-left:100px">
                 <div class=" icon-box ">
@@ -162,40 +163,34 @@
     </div>
 </section><!-- End Services Section -->
 
-
-<section id="about" class="about">
-
-</section>
-
 <!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio">
-    <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-            <h2>Galeri</h2>
-        </div>
+<section id="portfolio" class="portfolio cta">
+    <div data-aos="fade-up" style="background-color:darkred;text-align: center;">
+        <h2 style="color:white;">Galeri</h2>
+    </div>
+    <div class="container" style="padding-top:20px">
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
             <div class="portfolio-item filter-app">
-                <img src="<?= base_url('assets/img/jargas/1.png'); ?>" width="430" class="img-fluid" alt="">
+                <img src="<?= base_url('assets/img/jargas/a.png'); ?>" width="430" class="img-fluid" alt="">
             </div>
 
             <div class=" portfolio-item filter-web" style="padding-right: 10px;padding-left: 10px;">
-                <img src="<?= base_url('assets/img/jargas/2.png'); ?>" width="274" class="img-fluid" alt="">
+                <img src="<?= base_url('assets/img/jargas/b.png'); ?>" width="274" class="img-fluid" alt="">
             </div>
 
             <div class="portfolio-item filter-app">
-                <img src="<?= base_url('assets/img/jargas/5.png'); ?>" width="400" class="img-fluid" alt="">
+                <img src="<?= base_url('assets/img/jargas/0.png'); ?>" width="400" class="img-fluid" alt="">
             </div>
         </div>
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
             <div class="portfolio-item filter-app">
-                <img src="<?= base_url('assets/img/jargas/4.png'); ?>" width="370" class="img-fluid" alt="">
+                <img src="<?= base_url('assets/img/jargas/d.png'); ?>" width="370" class="img-fluid" alt="">
             </div>
 
             <div class="portfolio-item filter-app" style="padding-right: 90px;padding-left: 90px;">
-                <img src="<?= base_url('assets/img/jargas/3.png'); ?>" width="276" class="img-fluid" alt="">
+                <img src="<?= base_url('assets/img/jargas/c.png'); ?>" width="276" class="img-fluid" alt="">
             </div>
 
             <div class="portfolio-item filter-app">
@@ -215,12 +210,11 @@
 
 
 <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact section-bg">
-    <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-            <h2>Contact Us</h2>
-        </div>
+<section id="contact" class="contact cta">
+    <div data-aos="fade-up" style="background-color:darkred;text-align: center;">
+        <h2 style="color:white;">Contact Us</h2>
+    </div>
+    <div class="container" style="padding-top: 20px;">
 
         <div class="row">
 

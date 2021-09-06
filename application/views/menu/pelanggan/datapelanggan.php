@@ -1,7 +1,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
      <!-- Page Heading -->
-     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
      <section class="content">
           <!-- Default box -->
           <div class="row justify-content-center">
@@ -61,6 +61,7 @@
                                              <th>NIK</th>
                                              <th>Nama</th>
                                              <th>Alamat</th>
+                                             <th>Sektor</th>
                                              <th>kampung/dusun</th>
                                              <th>Rt</th>
                                              <th>Rw</th>
@@ -219,6 +220,9 @@
                     },
                     {
                          "data": "alamat"
+                    },
+                    {
+                         "data": "sektor"
                     },
                     {
                          "data": "kampung"

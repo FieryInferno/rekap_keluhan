@@ -35,7 +35,7 @@
       .tembus {
          position: relative;
          top: 33%;
-         background-color: rgba(0.7, 0.7, 0.7, 0.7);
+         background-color: rgba(0.7, 0.7, 75, 0.7);
          height: 200px;
          width: 100%;
          display: flex;

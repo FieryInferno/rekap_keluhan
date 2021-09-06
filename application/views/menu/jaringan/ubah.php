@@ -9,7 +9,7 @@
           <div class="row justify-content-center">
                <div class="col-5">
                     <div class="card card-primary">
-                         <form action="<?php echo base_url('menu/ubahjaringan/' . $jaringan['id']) ?>" method="POST" role="form" enctype="multipart/form-data">
+                         <form action="<?php echo base_url('kendala/ubahjaringan/' . $jaringan['id']) ?>" method="POST" role="form" enctype="multipart/form-data">
                               <input type="hidden" name="id" value="<?= $jaringan['id']; ?>">
                               <div class="card-body">
                                    <div class="form-group">

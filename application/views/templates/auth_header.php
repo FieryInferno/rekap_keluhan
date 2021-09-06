@@ -21,4 +21,4 @@
 
 </head>
 
-<body class="primary" style="background-color: blue;">
+<body class="primary" style="background-image: url('<?= base_url('assets/'); ?>img/cta-bg.jpg');background-size: cover;">

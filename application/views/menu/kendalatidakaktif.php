@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
      <!-- Page Heading -->
-     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
      <section class="content">
           <!-- Default box -->
           <div class="row justify-content-center">
@@ -39,6 +39,7 @@
                                              <th>Status</th>
                                              <th>Tanggal Kunjungan</th>
                                              <th>Tanggal Eksekusi</th>
+                                             <th>Kendala</th>
                                              <th>Keterangan</th>
                                         </thead>
                                         <tbody>
@@ -168,7 +169,7 @@
                               </div>
                               <div class="form-group col-sm-2">
                                    <label for="">kendala</label>
-                                   <select type="input" class="form-control" id="kendala" name="status">
+                                   <select type="input" class="form-control" id="kendala" name="kendala">
                                         <option value="Belum Siap">Belum Siap</option>
                                         <option value="Siap Pasang">Siap Pasang </option>
                                         <option value="Rumah Kosong">Rumah Kosong</option>
@@ -225,7 +226,6 @@
                                    </table>
                               </div>
                          </div>
-
                          <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                               <button type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
@@ -247,7 +247,7 @@
                          "data": "id",
                          "render": function(data, type, row) {
                               return `<a href="<?php base_url(); ?> ubahtidakaktif/${data}" class="btn btn-primary btn-sm">edit</>
-                                      <a href="<?php base_url(); ?> hapustidakaktif/${data}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ?');">delete</a>`;
+                                        <a href="<?php base_url(); ?> hapustidakaktif/${data}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ?');">delete</a>`;
                          }
                     },
                     {
@@ -284,6 +284,9 @@
                          "data": "tgleksekusi"
                     },
                     {
+                         "data": "kendala"
+                    },
+                    {
                          "data": "keterangan"
                     },
                ]
@@ -301,7 +304,7 @@
                          "data": "idp",
                          "render": function(data, type, row) {
                               return `<div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="customCheck${data}" value="${data}" onchange="pilihPelanggan(this)" nik="${row.nik}" nama="${row.nama}" rt="${row.rt}"rw="${row.rw}" sektor="${row.sektor}" nometer="${row.nometer}">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="customCheck${data}" value="${data}" onchange="pilihPelanggan(this)" nik="${row.nik}" nama="${row.nama}" kampung="${row.kampung}" rt="${row.rt}"rw="${row.rw}" sektor="${row.sektor}" nometer="${row.nometer}">
                                         <label class="form-check-label" for="customCheck${data}"></label>
                                    </div>`;
                          }
@@ -335,6 +338,7 @@
      });
 
      function pilihPelanggan(elem) {
+          let idp = $(elem).attr('idp');
           let nik = $(elem).attr('nik');
           let nama = $(elem).attr('nama');
           let kampung = $(elem).attr('kampung');
@@ -342,6 +346,7 @@
           let rw = $(elem).attr('rw');
           let sektor = $(elem).attr('sektor');
           let nometer = $(elem).attr('nometer');
+          $('#idp').val(idp);
           $('#nik').val(nik);
           $('#nama').val(nama);
           $('#kampung').val(kampung);

@@ -2,7 +2,7 @@
 
 
      <!-- Page Heading -->
-     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
      <section class="content">
           <!-- Default box -->
           <div class="row justify-content-center">
@@ -103,7 +103,7 @@
                               <label for="">Jabatan</label>
                               <select type="input" class="form-control" id="jabatan" name="jabatan">
                                    <option value="Administrator">Administrator</option>
-                                   <option value="kordinator">koordinator </option>
+                                   <option value="koordinator">koordinator </option>
                                    <option value="Direktur">Direktur</option>
                               </select>
                          </div>

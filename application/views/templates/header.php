@@ -56,4 +56,4 @@
 
 <body id="page-top">
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" style="background-color:maroon;" class="shadow">
